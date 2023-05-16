@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: notification-consumer
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: notificationTopic
+    consumer:
+      group-id: notificationId
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping: event:com.kafka.example.notificationconsumer.OrderPlacedEvent
+server:
+  port: 8081
